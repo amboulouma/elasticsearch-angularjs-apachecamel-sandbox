@@ -1,0 +1,8 @@
+node_modules/
+bower_components/
+.sass-cache/
+.idea/
+src/config/config.json
+tmp/
+dist/
+package-lock.json

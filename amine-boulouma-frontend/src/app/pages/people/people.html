@@ -1,0 +1,9 @@
+<div ng-controller="PeopleCtrl as peopleCtrl">
+
+    <p><input type="radio" value="jgc" ng-model="peopleCtrl.selected"> JGC</p>
+    <p><input type="radio" value="bha" ng-model="peopleCtrl.selected"> BHA</p>
+
+    <div>
+        <span>{{ peopleCtrl.content.person.firstname }}</span> <b>{{ peopleCtrl.content.person.lastname }}</b>
+    </div>
+</div>

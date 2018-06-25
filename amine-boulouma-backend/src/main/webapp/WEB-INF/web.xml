@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1" metadata-complete="true">
+    <absolute-ordering/>
+
+    <display-name>Amine Boulouma Backend</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!-- configure any of the properties on CamelContext -->
+    <!-- configure name of CamelContext -->
+    <context-param>
+        <param-name>name</param-name>
+        <param-value>amine-boulouma-backend</param-value>
+    </context-param>
+    <!-- configure allowUseOriginalMessage of CamelContext -->
+    <context-param>
+        <param-name>allowUseOriginalMessage</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <!-- configure streamCache of CamelContext -->
+    <context-param>
+        <param-name>streamCache</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <!-- configure propertyPlaceholder to load properties -->
+    <context-param>
+        <param-name>propertyPlaceholder.location</param-name>
+        <param-value>file:config/amine-boulouma-backend.properties, classpath:amine-boulouma-backend.properties</param-value>
+    </context-param>
+    <context-param>
+        <param-name>propertyPlaceholder.encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </context-param>
+    <context-param>
+        <param-name>propertyPlaceholder.ignoreMissingLocation</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>propertyPlaceholder.cache</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>propertyPlaceholder.propertyPrefix</param-name>
+        <param-value>amine-boulouma-backend.</param-value>
+    </context-param>
+    <!-- configure routes builders to use -->
+    <context-param>
+        <param-name>routeBuilder-project</param-name><!-- Camel will pickup any parameter names that start with routeBuilder (case ignored) -->
+        <param-value>packagescan:tech.bootstart.sandbox.amine.boulouma.routes</param-value>
+    </context-param>
+    <context-param>
+        <param-name>routeBuilder-auth</param-name>
+        <param-value>packagescan:fr.bootstart.component.auth.routes</param-value>
+    </context-param>
+    <context-param>
+	  <param-name>CamelContextLifecycle</param-name>
+	  <param-value>tech.bootstart.sandbox.amine.boulouma.AmineBouloumaCamelContextLifecycle</param-value>
+	</context-param>
+
+    <!-- register Camel as a listener -->
+    <listener>
+        <listener-class>org.apache.camel.component.servletlistener.SimpleCamelServletContextListener</listener-class>
+    </listener>
+
+    <!-- setup Camel Servlet -->
+    <servlet>
+        <display-name>Camel Http Transport Servlet</display-name>
+        <servlet-name>CamelServlet</servlet-name>
+        <servlet-class>org.apache.camel.component.servlet.CamelHttpTransportServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- define that url path for the Camel Servlet to use -->
+    <servlet-mapping>
+        <servlet-name>CamelServlet</servlet-name>
+        <url-pattern>/api/v1/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JolokiaAgent</servlet-name>
+        <servlet-class>org.jolokia.http.AgentServlet</servlet-class>
+        <init-param>
+            <param-name>mimeType</param-name>
+            <param-value>application/json</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JolokiaAgent</servlet-name>
+        <url-pattern>/jolokia/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- to setup Camel Swagger api servlet -->
+    <servlet>
+        <servlet-name>ApiDeclarationServlet</servlet-name>
+        <servlet-class>org.apache.camel.swagger.servlet.RestSwaggerServlet</servlet-class>
+        <init-param>
+            <param-name>base.path</param-name>
+            <param-value>api/v1</param-value>
+            <!--<param-value>http://dev.boot-start.com:8080/api/v2</param-value>-->
+        </init-param>
+        <init-param>
+            <param-name>api.path</param-name>
+            <param-value>api/v1/api-docs</param-value>
+            <!--<param-value>http://dev.boot-start.com:8080/api/v2/api-docs</param-value>-->
+        </init-param>
+        <init-param>
+            <param-name>schemas</param-name>
+            <param-value>http, https</param-value>
+        </init-param>
+        <init-param>
+            <param-name>apiContextIdListing</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>api.version</param-name>
+            <param-value>1.0.0</param-value>
+        </init-param>
+        <init-param>
+            <param-name>api.title</param-name>
+            <param-value>Amine Boulouma Sandbox Backend API</param-value>
+        </init-param>
+        <init-param>
+            <param-name>api.description</param-name>
+            <param-value>Amine Boulouma Sandbox Backend API - REST services</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+
+    <!-- swagger api declaration -->
+    <servlet-mapping>
+        <servlet-name>ApiDeclarationServlet</servlet-name>
+        <url-pattern>/api/v1/api-docs/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- enable CORS filter -->
+    <filter>
+        <filter-name>CrossOriginFilter</filter-name>
+        <filter-class>org.eclipse.jetty.servlets.CrossOriginFilter</filter-class>
+        <init-param>
+            <param-name>allowedOrigins</param-name>
+            <param-value>*</param-value>
+        </init-param>
+        <init-param>
+            <param-name>allowedMethods</param-name>
+            <param-value>GET,HEAD,POST,PUT,DELETE,TRACE,OPTIONS,CONNECT,PATCH</param-value>
+        </init-param>
+        <init-param>
+            <param-name>allowedHeaders</param-name>
+            <param-value>Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization,Client-Id</param-value>
+        </init-param>
+        <init-param>
+            <param-name>chainPreflight</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <!--<init-param>
+            <param-name>exposedHeaders</param-name>
+            <param-value></param-value>
+        </init-param>-->
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CrossOriginFilter</filter-name>
+        <url-pattern>/api/v1/api-docs/*</url-pattern>
+        <url-pattern>/api/v1/*</url-pattern>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+</web-app>

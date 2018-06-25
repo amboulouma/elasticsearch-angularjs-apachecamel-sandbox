@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>bootstart-parent</artifactId>
+        <groupId>tech.bootstart</groupId>
+        <version>1.5.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>tech.bootstart.projects</groupId>
+    <artifactId>amine-boulouma-backend</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <name>Amine Boulouma Sandbox Backend</name>
+    <description></description>
+    <url></url>
+
+
+    <properties>
+        <jvm.xms>64</jvm.xms>
+        <jvm.xmx>1024</jvm.xmx>
+        <main.class>tech.bootstart.utils.EmbeddedJettyServer</main.class>
+        <service.user>bootstart</service.user>
+        <jetty.version>9.4.0.v20161208</jetty.version>
+
+        <!-- Boot-Start properties -->
+        <bootstart-auth-client.version>2.1.2-SNAPSHOT</bootstart-auth-client.version>
+        <bootstart-camel.version>1.4.1-SNAPSHOT</bootstart-camel.version>
+        <bootstart-data.version>1.2.2-SNAPSHOT</bootstart-data.version>
+        <bootstart-elasticsearch.version>2.5.4-SNAPSHOT</bootstart-elasticsearch.version>
+
+        <!-- Backend properties -->
+        <camel.version>2.17.4</camel.version>
+        <jackson.version>2.8.6</jackson.version>
+        <joptsimple.version>5.0.3</joptsimple.version>
+        <jbcrypt.version>0.3m</jbcrypt.version>
+        <josejwt.version>3.10</josejwt.version>
+        <keycloak-admin-client.version>2.0.0.Final</keycloak-admin-client.version>
+        <resteasy.version>3.0.18.Final</resteasy.version>
+        <httpcomponents.version>4.5.2</httpcomponents.version>
+        <jboss-jaxrx.version>1.0.0.Final</jboss-jaxrx.version>
+        <elasticsearch.version>2.4.4</elasticsearch.version>
+
+        <!-- Other -->
+        <jolokia.version>1.3.5</jolokia.version>
+        <log4j.version>1.2.17</log4j.version>
+        <slf4j.version>1.7.22</slf4j.version>
+
+        <junit.version>4.12</junit.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.jopt-simple</groupId>
+            <artifactId>jopt-simple</artifactId>
+            <version>${joptsimple.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-csv</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-freemarker</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jackson</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jsonpath</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-metrics</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-servlet</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-servletlistener</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <!--<dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-swagger-java</artifactId>
+            <version>${camel.version}</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpcomponents.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty.aggregate</groupId>
+            <artifactId>jetty-all</artifactId>
+            <version>${jetty.version}</version>
+            <classifier>uber</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>${elasticsearch.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson2-provider</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-multipart-provider</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.ws.rs</groupId>
+            <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
+            <version>${jboss-jaxrx.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jolokia</groupId>
+            <artifactId>jolokia-core</artifactId>
+            <version>${jolokia.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-admin-client</artifactId>
+            <version>${keycloak-admin-client.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>tech.bootstart.components</groupId>
+            <artifactId>bootstart-auth-client</artifactId>
+            <version>${bootstart-auth-client.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tech.bootstart.components</groupId>
+            <artifactId>bootstart-camel</artifactId>
+            <version>${bootstart-camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tech.bootstart.components</groupId>
+            <artifactId>bootstart-data</artifactId>
+            <version>${bootstart-data.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tech.bootstart.components</groupId>
+            <artifactId>bootstart-elasticsearch</artifactId>
+            <version>${bootstart-elasticsearch.version}</version>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <httpConnector>
+                        <port>8181</port>
+                    </httpConnector>
+                    <stopPort>8182</stopPort>
+                    <scanTargets>
+                        <scanTarget>src/main/java</scanTarget>
+                    </scanTargets>
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
