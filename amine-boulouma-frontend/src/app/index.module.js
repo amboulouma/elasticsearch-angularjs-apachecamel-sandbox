@@ -5,7 +5,7 @@ import {runBlock} from './index.run';
 import { PeopleController } from "./pages/people/people.controller";
 import {NavbarCtrl} from './partials/navbar/navbar.controller';
 
-import {PersonService} from './services/services.person';
+import {PeopleService} from './services/people.service';
 
 angular.module(
     'amine-boulouma-sandbox',
@@ -28,7 +28,9 @@ angular.module(
     .controller('PeopleController', PeopleController)
     .controller('NavbarCtrl', NavbarCtrl)
 
-    .service('PersonSrv', PersonService)
+    .service('peopleService', PeopleService)
+
+    .constant('BACKEND_URL', "http://localhost:8181/api/v1/")
 
     .config(routerConfig)
     .run(runBlock)

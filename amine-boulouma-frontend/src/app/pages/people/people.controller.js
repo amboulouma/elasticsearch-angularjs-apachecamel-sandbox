@@ -1,12 +1,26 @@
 export class PeopleController {
-    constructor() {
+    constructor($http, BACKEND_URL, peopleService) {
         'ngInject';
-        this.persons = [
-            {
-                lastName: "Boulouma",
-                firstName: "Amine",
-                age: 22
-            }
-        ]
+
+        this.$http = $http;
+        this.BACKEND_URL = BACKEND_URL;
+        this.peopleService = peopleService;
+
+        this.formCollapsed = true;
+        this.form = {
+            last_name: "Boulouma",
+            first_name: "Amine",
+            age: 22
+        };
+
+
+        this.persons = [];
     }
+
+    createPerson() {
+        this.peopleService.createPerson(this.form).then(() => {
+            alert("Success");
+        })
+    }
+
 }
