@@ -7,11 +7,7 @@ export class PeopleController {
         this.peopleService = peopleService;
 
         this.formCollapsed = true;
-        this.form = {
-            last_name: "Boulouma",
-            first_name: "Amine",
-            age: 22
-        };
+        this.form;
 
         this.getPeople();
     }
