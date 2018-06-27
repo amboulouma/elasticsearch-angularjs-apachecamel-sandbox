@@ -19,6 +19,14 @@ public class PeopleRouteBuilder extends RouteBuilder {
             .bean("elasticsearch", "index")
         ;
 
+
+        from("direct:people.search")
+                .setProperty(ElasticsearchConstants.ELASTIC_INDEX, constant("{{elasticsearch.index.name}}"))
+                .setProperty(ElasticsearchConstants.ELASTIC_TYPE, constant("{{elasticsearch.type.people}}"))
+                .setProperty(ElasticsearchConstants.ELASTIC_REFRESH, constant(true))
+                .bean("elasticsearch", "search")
+        ;
+
     }
 
 }

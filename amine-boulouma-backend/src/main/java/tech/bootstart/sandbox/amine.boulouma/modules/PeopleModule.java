@@ -17,4 +17,9 @@ public class PeopleModule {
                 .object("people", body);
         exchange.getIn().setBody(jsonBuilder.build());
     }
+
+
+    public void search(Exchange exchange) {
+        int i = 0;
+    }
 }

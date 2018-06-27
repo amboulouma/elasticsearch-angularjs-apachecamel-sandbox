@@ -3,7 +3,10 @@ export class PeopleService {
         'ngInject';
        this.$http = $http;
        this.BACKEND_URL = BACKEND_URL;
+       this.list = [];
+       this.getPeople();
        }
+
 
     createPerson(form) {
         return this.$http({
@@ -11,5 +14,16 @@ export class PeopleService {
             url: this.BACKEND_URL + "people/create",
             data: form
         })
+    }
+
+
+    getPeople() {
+        return this.$http({
+            method: 'GET',
+            url: this.BACKEND_URL + "people/search",
+        }).then(response => {
+            this.list = response.data.hits.hits;
+        });
+
     }
 }

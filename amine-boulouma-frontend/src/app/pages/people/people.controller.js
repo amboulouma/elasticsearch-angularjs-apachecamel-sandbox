@@ -13,14 +13,21 @@ export class PeopleController {
             age: 22
         };
 
-
-        this.persons = [];
+        this.getPeople();
     }
+
 
     createPerson() {
         this.peopleService.createPerson(this.form).then(() => {
             alert("Success");
+            this.getPeople();
         })
     }
 
+
+    getPeople() {
+        this.peopleService.getPeople().then(() => {
+            console.log("People loaded");
+        })
+    }
 }

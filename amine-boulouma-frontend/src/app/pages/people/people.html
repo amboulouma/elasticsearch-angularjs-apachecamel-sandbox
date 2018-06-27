@@ -10,10 +10,11 @@
                 <th>Age</th>
                 <th>Actions</th>
             </tr>
-            <tr ng-repeat="p in peopleController.persons">
-                <td>{{ p.lastName }}</td>
-                <td>{{ p.firstName }}</td>
-                <td>{{ p.age }}</td>
+
+            <tr ng-repeat="p in peopleController.peopleService.list">
+                <td>{{ p._source.people.last_name }}</td>
+                <td>{{ p._source.people.first_name }}</td>
+                <td>{{ p._source.people.age }}</td>
                 <td>
                     <button type="button" class="btn btn-secondary btn-sm">Editer</button>
                     <button type="button" class="btn btn-danger btn-sm">Supprimer</button>
@@ -23,7 +24,7 @@
     </div>
 
     <div class="text-center">
-        <button type="button" class="btn btn-primary" ng-click="peopleController.formCollapsed = false;">Creer</button>
+        <button type="button" class="btn btn-primary" ng-click="peopleController.formCollapsed = !peopleController.formCollapsed;">Creer</button>
     </div>
 
 
