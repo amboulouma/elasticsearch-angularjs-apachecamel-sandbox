@@ -1,8 +1,12 @@
-export class PeopleCtrl {
-    constructor(PersonSrv) {
+export class PeopleController {
+    constructor() {
         'ngInject';
-        console.log("Using PersonService version "+ PersonSrv.VERSION);
-        this.content = PersonSrv.content;
-        console.log("People loaded");
+        this.persons = [
+            {
+                lastName: "Boulouma",
+                firstName: "Amine",
+                age: 22
+            }
+        ]
     }
 }

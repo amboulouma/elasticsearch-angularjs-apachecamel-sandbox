@@ -1,8 +1,15 @@
-export function routerConfig($routeProvider) {
+export function routerConfig($stateProvider, $urlRouterProvider) {
     'ngInject';
 
-    $routeProvider
-    .when("/", {
-        templateUrl: 'app/pages/people/people.html'
-    });
+    $stateProvider
+        .state('people', {
+            url: '/people',
+            templateUrl: 'app/pages/people/people.html',
+            controller: 'PeopleController',
+            controllerAs: 'peopleController'
+        });
+
+    $urlRouterProvider
+        .otherwise("/people");
+
 }

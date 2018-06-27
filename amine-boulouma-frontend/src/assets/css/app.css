@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+h1{
+    align-self: center;
+}
+
+#table {
+    margin: 30px;
+    align-self: center;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+span {
+    padding: 8px;
+}
+button {
+    align-self: center;
+}
+#form {
+    align-self: center;
+    width: 50%;
+    margin: 30px;
+    display : none;
+}

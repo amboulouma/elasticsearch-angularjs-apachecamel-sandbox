@@ -2,12 +2,10 @@
 import {routerConfig} from './index.route';
 import {runBlock} from './index.run';
 
-import {PeopleCtrl} from './pages/people/people.controller';
+import { PeopleController } from "./pages/people/people.controller";
 import {NavbarCtrl} from './partials/navbar/navbar.controller';
 
 import {PersonService} from './services/services.person';
-
-console.log(PeopleCtrl);
 
 angular.module(
     'amine-boulouma-sandbox',
@@ -27,7 +25,7 @@ angular.module(
         'ng.deviceDetector'
     ])
 
-    .controller('PeopleCtrl', PeopleCtrl)
+    .controller('PeopleController', PeopleController)
     .controller('NavbarCtrl', NavbarCtrl)
 
     .service('PersonSrv', PersonService)
