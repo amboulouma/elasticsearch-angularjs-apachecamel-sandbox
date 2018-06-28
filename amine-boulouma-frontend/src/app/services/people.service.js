@@ -3,8 +3,17 @@ export class PeopleService {
         'ngInject';
         this.$http = $http;
         this.BACKEND_URL = BACKEND_URL;
-        this.list = [];
+
+        this.init();
         this.getPeople();
+    }
+
+
+    init() {
+        this.list = [];
+        this.filters = {
+            text : ""
+        }
     }
 
 
@@ -20,12 +29,16 @@ export class PeopleService {
 
 
     getPeople() {
-        let self = this;
+        let headers = {
+            personTextSearch: this.filters.text
+        };
+
         this.$http({
             method: 'GET',
             url: this.BACKEND_URL + "people/search",
+            params: headers
         }).then(response => {
-            self.list = response.data.hits.hits;
+            this.list = response.data.hits.hits;
             console.log("People Loaded");
         });
     }

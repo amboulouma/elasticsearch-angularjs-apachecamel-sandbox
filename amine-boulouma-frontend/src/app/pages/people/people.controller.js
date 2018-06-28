@@ -1,23 +1,28 @@
 export class PeopleController {
     constructor($http, BACKEND_URL, peopleService) {
         'ngInject';
-
         this.$http = $http;
         this.BACKEND_URL = BACKEND_URL;
         this.peopleService = peopleService;
-        this.formCollapsed = true;
-        this.updateFormCollapsed = true;
+
         this.init();
-        this.getPeople();
+        this.refresh();
     }
 
 
     init() {
+        this.formCollapsed = true;
+        this.updateFormCollapsed = true;
         this.form = {
             last_name: "",
             first_name: "",
             age: ""
         };
+    }
+
+
+    refresh() {
+        this.getPeople();
     }
 
 
@@ -49,7 +54,6 @@ export class PeopleController {
             console.log("Person updated");
             this.getPeople();
         })
-
     }
 
 

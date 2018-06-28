@@ -3,6 +3,8 @@ package tech.bootstart.sandbox.amine.boulouma.routes;
 import org.apache.camel.builder.RouteBuilder;
 import tech.bootstart.utils.elasticsearch.ElasticsearchConstants;
 
+import static tech.bootstart.sandbox.amine.boulouma.modules.PeopleModule.peopleModule;
+
 public class PeopleRouteBuilder extends RouteBuilder {
 
     @Override
@@ -19,6 +21,14 @@ public class PeopleRouteBuilder extends RouteBuilder {
 
 
         from("direct:people.search")
+                .setProperty(ElasticsearchConstants.ELASTIC_INDEX, constant("{{elasticsearch.index.name}}"))
+                .setProperty(ElasticsearchConstants.ELASTIC_TYPE, constant("{{elasticsearch.type.people}}"))
+                .process(peopleModule::prepareSearch)
+                .bean("elasticsearch", "search")
+        ;
+
+
+        from("direct:people.filter")
                 .setProperty(ElasticsearchConstants.ELASTIC_INDEX, constant("{{elasticsearch.index.name}}"))
                 .setProperty(ElasticsearchConstants.ELASTIC_TYPE, constant("{{elasticsearch.type.people}}"))
                 .bean("elasticsearch", "search")

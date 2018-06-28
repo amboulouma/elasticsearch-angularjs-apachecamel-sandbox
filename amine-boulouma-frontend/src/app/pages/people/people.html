@@ -1,38 +1,12 @@
-
 <div class="container container-fluid">
-    <h1>Amine Boulouma Sandbox</h1>
-
-    <div class="col-xs-12 text-center">
-        <table>
-            <tr>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Age</th>
-                <th>Actions</th>
-            </tr>
-
-            <tr ng-repeat="p in peopleController.peopleService.list">
-                <td>{{ p._source.people.last_name }}</td>
-                <td>{{ p._source.people.first_name }}</td>
-                <td>{{ p._source.people.age }}</td>
-                <td>
-                    <button class="btn btn-secondary btn-sm"
-                            ng-click="peopleController.prepareUpdate(p)">Update</button>
-                    <button class="btn btn-danger btn-sm"
-                            ng-click="peopleController.deletePerson(p._id);">Delete</button>
-                </td>
-            </tr>
-
-
-        </table>
-    </div>
-
-    <div class="text-center">
-        <button class="m-2 btn btn-primary"
-                ng-click="peopleController.formCollapsed = !peopleController.formCollapsed;">Create</button>
-    </div>
-
+    <!-- Header -->
+    <ng-include src="'app/pages/people/header/header.html'"></ng-include>
+    <!-- Search Form -->
+    <ng-include src="'app/pages/people/form/search-form.html'"></ng-include>
+    <!-- Table People -->
+    <ng-include src="'app/pages/people/table/table-people.html'"></ng-include>
+    <!-- Update Form-->
     <ng-include src="'app/pages/people/form/update-form.html'"></ng-include>
+    <!-- Creating form-->
     <ng-include src="'app/pages/people/form/creation-form.html'"></ng-include>
-
 </div>
