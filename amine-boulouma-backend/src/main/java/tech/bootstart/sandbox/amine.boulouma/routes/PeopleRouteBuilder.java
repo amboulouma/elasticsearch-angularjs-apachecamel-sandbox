@@ -1,10 +1,7 @@
 package tech.bootstart.sandbox.amine.boulouma.routes;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.freemarker.FreemarkerConstants;
 import tech.bootstart.utils.elasticsearch.ElasticsearchConstants;
-
-import static tech.bootstart.sandbox.amine.boulouma.modules.PeopleModule.peopleModule;
 
 public class PeopleRouteBuilder extends RouteBuilder {
 
@@ -13,20 +10,26 @@ public class PeopleRouteBuilder extends RouteBuilder {
 
 
         from("direct:people.create")
-            .setProperty(ElasticsearchConstants.ELASTIC_INDEX, constant("{{elasticsearch.index.name}}"))
-            .setProperty(ElasticsearchConstants.ELASTIC_TYPE, constant("{{elasticsearch.type.people}}"))
-            .process(peopleModule::prepareIndex)
-            .bean("elasticsearch", "index")
+                .setProperty(ElasticsearchConstants.ELASTIC_INDEX, constant("{{elasticsearch.index.name}}"))
+                .setProperty(ElasticsearchConstants.ELASTIC_TYPE, constant("{{elasticsearch.type.people}}"))
+                .bean("elasticsearch", "index")
+                .log("People created")
         ;
 
 
         from("direct:people.search")
                 .setProperty(ElasticsearchConstants.ELASTIC_INDEX, constant("{{elasticsearch.index.name}}"))
                 .setProperty(ElasticsearchConstants.ELASTIC_TYPE, constant("{{elasticsearch.type.people}}"))
-                .setProperty(ElasticsearchConstants.ELASTIC_REFRESH, constant(true))
                 .bean("elasticsearch", "search")
         ;
 
-    }
 
+        from("direct:people.delete")
+                .setProperty(ElasticsearchConstants.ELASTIC_INDEX, constant("{{elasticsearch.index.name}}"))
+                .setProperty(ElasticsearchConstants.ELASTIC_TYPE, constant("{{elasticsearch.type.people}}"))
+                .setProperty(ElasticsearchConstants.ELASTIC_ID, header("personId"))
+                .bean("elasticsearch", "delete")
+                .log("People ${in.header.personId} deleted")
+        ;
+    }
 }

@@ -16,19 +16,21 @@
                 <td>{{ p._source.people.first_name }}</td>
                 <td>{{ p._source.people.age }}</td>
                 <td>
-                    <button type="button" class="btn btn-secondary btn-sm">Editer</button>
-                    <button type="button" class="btn btn-danger btn-sm">Supprimer</button>
+                    <button class="btn btn-secondary btn-sm">Editer</button>
+                    <button class="btn btn-danger btn-sm"
+                            ng-click="peopleController.deletePerson(p._id);">Supprimer</button>
                 </td>
             </tr>
         </table>
     </div>
 
     <div class="text-center">
-        <button type="button" class="btn btn-primary" ng-click="peopleController.formCollapsed = !peopleController.formCollapsed;">Creer</button>
+        <button class="btn btn-primary"
+                ng-click="peopleController.formCollapsed = !peopleController.formCollapsed;">Creer</button>
     </div>
 
 
-    <form class="col-xs-12" ng-hide="peopleController.formCollapsed">
+    <form class="col-xs-12" ng-hide="peopleController.formCollapsed" >
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Last Name</label>
             <div class="col-sm-10">
@@ -54,7 +56,7 @@
             </div>
         </div>
 
-        <button class="btn btn-success" ng-click="peopleController.createPerson(); peopleController.formCollapsed = true;">Submit</button>
+        <button class="btn btn-success" ng-click="peopleController.createPerson()">Submit</button>
     </form>
 
 </div>

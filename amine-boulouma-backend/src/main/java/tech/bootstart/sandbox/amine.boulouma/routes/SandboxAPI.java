@@ -1,6 +1,7 @@
 package tech.bootstart.sandbox.amine.boulouma.routes;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.rest.RestParamType;
 
 public class SandboxAPI extends RouteBuilder {
 
@@ -15,10 +16,18 @@ public class SandboxAPI extends RouteBuilder {
                     .route()
                         .to("direct:people.create")
                     .endRest()
+
                 .get("/search")
                     .description("Searching people")
                     .route()
                         .to("direct:people.search")
+                    .endRest()
+
+                .delete("/delete")
+                    .description("Deleting people")
+                    .param().name("personId").type(RestParamType.query).description("ID of the person to delete").dataType("string").required(true).endParam()
+                    .route()
+                        .to("direct:people.delete")
                     .endRest()
         ;
     }
