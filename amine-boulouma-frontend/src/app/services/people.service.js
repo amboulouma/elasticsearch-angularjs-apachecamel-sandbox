@@ -12,7 +12,9 @@ export class PeopleService {
     init() {
         this.list = [];
         this.filters = {
-            text : ""
+            text : "",
+            age_min: 0,
+            age_max: 200,
         }
     }
 
@@ -30,7 +32,9 @@ export class PeopleService {
 
     getPeople() {
         let headers = {
-            personTextSearch: this.filters.text
+            personTextSearch: this.filters.text,
+            personAgeMin: this.filters.age_min,
+            personAgeMax: this.filters.age_max
         };
 
         this.$http({
