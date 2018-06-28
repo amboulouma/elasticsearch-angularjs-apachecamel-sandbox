@@ -12,6 +12,7 @@ public class PeopleRouteBuilder extends RouteBuilder {
         from("direct:people.create")
                 .setProperty(ElasticsearchConstants.ELASTIC_INDEX, constant("{{elasticsearch.index.name}}"))
                 .setProperty(ElasticsearchConstants.ELASTIC_TYPE, constant("{{elasticsearch.type.people}}"))
+                .setProperty(ElasticsearchConstants.ELASTIC_REFRESH, constant(true))
                 .bean("elasticsearch", "index")
                 .log("People created")
         ;
@@ -27,6 +28,7 @@ public class PeopleRouteBuilder extends RouteBuilder {
         from("direct:people.delete")
                 .setProperty(ElasticsearchConstants.ELASTIC_INDEX, constant("{{elasticsearch.index.name}}"))
                 .setProperty(ElasticsearchConstants.ELASTIC_TYPE, constant("{{elasticsearch.type.people}}"))
+                .setProperty(ElasticsearchConstants.ELASTIC_REFRESH, constant(true))
                 .setProperty(ElasticsearchConstants.ELASTIC_ID, header("personId"))
                 .bean("elasticsearch", "delete")
                 .log("People ${in.header.personId} deleted")

@@ -28,7 +28,7 @@ angular.module(
     .controller('PeopleController', PeopleController)
     .controller('NavbarCtrl', NavbarCtrl)
 
-    .service('PeopleService', PeopleService)
+    .service('peopleService', PeopleService)
 
     .constant('BACKEND_URL', "http://localhost:8181/api/v1/")
 

@@ -1,7 +1,7 @@
 {
   "name": "jgc-sandbox",
   "version": "1.0.0",
-  "description": "JGC Sandbox Frontend",
+  "description": "Amine Boulouma Sandbox",
   "dependencies": {},
   "devDependencies": {
     "babel-core": "~6.8.0",
