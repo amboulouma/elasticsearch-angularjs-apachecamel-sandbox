@@ -11,6 +11,7 @@ public class SandboxAPI extends RouteBuilder {
         restConfiguration().component("servlet");
 
         rest("/people")
+
                 .post("/create")
                     .description("Creation of a people")
                     .route()
@@ -23,9 +24,20 @@ public class SandboxAPI extends RouteBuilder {
                         .to("direct:people.search")
                     .endRest()
 
+                .put("/update")
+                    .description("Updating people")
+                    .route()
+                        .to("direct:people.update")
+                    .endRest()
+
                 .delete("/delete")
                     .description("Deleting people")
-                    .param().name("personId").type(RestParamType.query).description("ID of the person to delete").dataType("string").required(true).endParam()
+                    .param().name("personId")
+                            .type(RestParamType.query)
+                            .description("ID of the person to delete")
+                            .dataType("string")
+                            .required(true)
+                        .endParam()
                     .route()
                         .to("direct:people.delete")
                     .endRest()

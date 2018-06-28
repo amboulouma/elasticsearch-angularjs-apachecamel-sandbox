@@ -26,8 +26,22 @@ export class PeopleService {
             url: this.BACKEND_URL + "people/search",
         }).then(response => {
             self.list = response.data.hits.hits;
+            console.log("People Loaded");
         });
     }
+
+
+    updatePerson(id, updateForm) {
+        return this.$http({
+            method: 'PUT',
+            url: this.BACKEND_URL + "people/update",
+            params: {
+                personId: id
+            },
+            data: updateForm
+        })
+    }
+
 
     deletePerson(id) {
         return this.$http({
