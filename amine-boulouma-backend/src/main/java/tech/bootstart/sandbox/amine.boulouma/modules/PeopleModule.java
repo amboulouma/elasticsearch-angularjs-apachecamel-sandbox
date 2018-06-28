@@ -18,7 +18,9 @@ public class PeopleModule {
         String textSearch = in.getHeader("personTextSearch", String.class);
         BoolQueryBuilder query = boolQuery();
         if (textSearch != null && !textSearch.isEmpty()) {
-            query.filter(matchPhrasePrefixQuery("people.last_name", textSearch));
+            query.should(matchPhrasePrefixQuery("people.last_name", textSearch));
+            query.should(matchPhrasePrefixQuery("people.first_name", textSearch));
+            query.minimumNumberShouldMatch(1);
         }
         exchange.setProperty(ElasticsearchConstants.ELASTIC_QUERY, query);
 
